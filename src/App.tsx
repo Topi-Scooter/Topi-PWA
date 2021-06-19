@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Map from './Map';
+import Map from './components/Map';
 import { loadMapApi } from './utils/GoogleMapsUtils';
 
 function App() {
