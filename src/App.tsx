@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import Map from './components/Map';
 import { loadMapApi } from './utils/GoogleMapsUtils';
+import { BottomMenu } from './components/BottomMenu';
 
 function App() {
   const nightTheme : string = "a4157e9a5c74ff29"
@@ -18,11 +19,10 @@ function App() {
   return (
     <div className="App">
       {scriptLoaded && (
-        <Map 
-          mapId={nightTheme}
-          mapTypeControl={true}
-        />
+        <Map mapId={nightTheme} >
+        </Map>
       )}
+      <BottomMenu></BottomMenu>
     </div>
   );
 }
