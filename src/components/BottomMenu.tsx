@@ -7,7 +7,7 @@ import MyLocationIcon from '@material-ui/icons/MyLocation';
 
 interface Props {
     
-}// TODO Manage styles better
+} // TODO Manage styles better
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -25,14 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         menuLeft: {
             float: "left",
-            margin: theme.spacing(1),
+            margin: theme.spacing(2),
         },
         menuRight: {
             float: "right",
-            margin: theme.spacing(1),
+            margin: theme.spacing(2),
         },
         extendedText: {
-            margin: theme.spacing(8),
+            margin: theme.spacing(9),
         }
         
     }),
@@ -45,19 +45,19 @@ export function BottomMenu({}: Props): ReactElement {
         <div className={classes.root}>
             <Grid container justify="center" alignItems="center" direction="row" >
                 <Grid item xs={6}>
-                    <Fab className={classes.menuLeft}>
+                    <Fab className={classes.menuLeft} size="small">
                         <WarningRoundedIcon></WarningRoundedIcon>
                     </Fab>
                 </Grid>
 
                 <Grid item xs={6}>
-                    <Fab className={classes.menuRight}>
+                    <Fab className={classes.menuRight} size="small">
                         <MyLocationIcon></MyLocationIcon>
                     </Fab>
                 </Grid>
 
                 <Grid item>
-                    <Fab variant="extended" color="primary">
+                    <Fab variant="extended" color="primary" size="large">
                         <span className={classes.extendedText}>
                             RIDE
                         </span>
