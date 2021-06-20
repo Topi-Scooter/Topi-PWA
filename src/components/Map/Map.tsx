@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './Map.scss';
 
 interface IMapProps {
-    mapType: google.maps.MapTypeId;
+    mapId: string;
     mapTypeControl?: boolean;
 }
 
@@ -11,10 +11,12 @@ type GoogleMap = google.maps.Map;
 const cmuPosition = { lat: 39.081098, lng: -108.554785 }; // TODO move to better place
 const zoom = 16; // TODO move to better place
 
-const Map: React.FC<IMapProps> = ({ mapType, mapTypeControl = false }) => {
+const Map: React.FC<IMapProps> = ({ mapId, mapTypeControl = false }) => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [map, setMap] = useState<GoogleMap>();
+
+    console.log(process.env.GOOGLE_MAP_STYLE)
 
     const initMap = (zoomLevel: number, address: GoogleLatLng): void => {
         if (ref.current) {
@@ -23,7 +25,7 @@ const Map: React.FC<IMapProps> = ({ mapType, mapTypeControl = false }) => {
                     zoom: zoomLevel,
                     center: address,
                     mapTypeControl: mapTypeControl,
-                    mapTypeId: mapType,
+                    mapId: mapId,
                     streetViewControl: false,
                     scaleControl: false,
                     rotateControl: false,
