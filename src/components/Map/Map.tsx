@@ -3,7 +3,6 @@ import './Map.scss';
 
 interface IMapProps {
     mapId: string;
-    mapTypeControl?: boolean;
 }
 
 type GoogleLatLng = google.maps.LatLng;
@@ -11,12 +10,10 @@ type GoogleMap = google.maps.Map;
 const cmuPosition = { lat: 39.081098, lng: -108.554785 }; // TODO move to better place
 const zoom = 16; // TODO move to better place
 
-const Map: React.FC<IMapProps> = ({ mapId, mapTypeControl = false }) => {
+const Map: React.FC<IMapProps> = ({ mapId }) => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [map, setMap] = useState<GoogleMap>();
-
-    console.log(process.env.GOOGLE_MAP_STYLE)
 
     const initMap = (zoomLevel: number, address: GoogleLatLng): void => {
         if (ref.current) {
@@ -24,13 +21,13 @@ const Map: React.FC<IMapProps> = ({ mapId, mapTypeControl = false }) => {
                 new google.maps.Map(ref.current, {
                     zoom: zoomLevel,
                     center: address,
-                    mapTypeControl: mapTypeControl,
                     mapId: mapId,
+                    mapTypeControl: false,
                     streetViewControl: false,
                     scaleControl: false,
                     rotateControl: false,
                     fullscreenControl: false,
-                    zoomControl: true,
+                    zoomControl: false,
                 })
             );
         }
