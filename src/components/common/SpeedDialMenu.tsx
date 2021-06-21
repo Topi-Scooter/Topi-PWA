@@ -1,5 +1,4 @@
 import React from 'react'
-import clsx from 'clsx';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import SpeedDial from '@material-ui/lab/SpeedDial';
@@ -32,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     speedDial: {
+      // TODO might need to rethink this style if we use this in another palce other than bottomMenu
       marginRight: theme.spacing(-1),
     },
   }),
@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const SpeedDialMenu = (props: Props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [hidden, setHidden] = React.useState(false);
-    const [direction, setDirection] = React.useState(props.direction);
+    const [hidden] = React.useState(false);
+    const [direction] = React.useState(props.direction);
   
     const handleOpen = () => {
       setOpen(true);

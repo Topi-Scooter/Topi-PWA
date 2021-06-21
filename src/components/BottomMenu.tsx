@@ -18,10 +18,9 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import BugReportIcon from '@material-ui/icons/BugReport';
 
 interface Props {
-    
 } 
 
-// TODO Manage styles better
+// TODO Look into themes for whole app styling
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+// TODO: need different actions depending on riding || !riding
 const speedDialActions = [
     {
         icon: <BugReportIcon/>,
@@ -81,7 +81,7 @@ export function BottomMenu({}: Props): ReactElement {
                         className={classes.fab}
                         primaryIcon={<SettingsIcon/>} 
                         secondaryIcon={<CloseIcon/>} 
-                        actions={speedDialActions} 
+                        actions={speedDialActions}
                         color="primary" 
                         size="small" 
                     />
