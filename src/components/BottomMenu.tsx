@@ -1,23 +1,27 @@
+/*
+BottomMenu Options
+Author: Allen
+*/
 import React, { ReactElement } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
-import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
+
+import SpeedDialMenu from './common/SpeedDialMenu';
 import SettingsIcon from '@material-ui/icons/Settings';
-
-import BottomMenuSpeedDial from './BottomMenuSpeedDial';
-
-import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
-import SaveIcon from '@material-ui/icons/Save';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
+import HighlightIcon from '@material-ui/icons/Highlight';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import BugReportIcon from '@material-ui/icons/BugReport';
 
 interface Props {
     
-} // TODO Manage styles better
+} 
+
+// TODO Manage styles better
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -33,8 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
             pointerEvents: 'auto',
             margin: theme.spacing(3),
             marginTop: theme.spacing(-1),
-        },
-        
+        },  
         extendedText: {
             marginLeft: theme.spacing(9),
             marginRight: theme.spacing(9),
@@ -43,6 +46,28 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+const speedDialActions = [
+    {
+        icon: <BugReportIcon/>,
+        name: "reportBug",
+        callback: ()=>{},
+    },
+    {
+        icon: <LockIcon/>,
+        name: "lockScooter",
+        callback: ()=>{},
+    },
+    {
+        icon: <Brightness4Icon/>,
+        name: "darkMode",
+        callback: ()=>{},
+    },
+    {
+        icon: <HighlightIcon/>,
+        name: "flashlight",
+        callback: ()=>{},
+    },
+]
 
 export function BottomMenu({}: Props): ReactElement {
     const classes = useStyles()
@@ -52,7 +77,14 @@ export function BottomMenu({}: Props): ReactElement {
             <Grid container justify="center" alignItems="flex-end" direction="column" >
 
                 <Grid item>
-                    <BottomMenuSpeedDial />
+                    <SpeedDialMenu
+                        className={classes.fab}
+                        primaryIcon={<SettingsIcon/>} 
+                        secondaryIcon={<CloseIcon/>} 
+                        actions={speedDialActions} 
+                        color="primary" 
+                        size="small" 
+                    />
                 </Grid>
 
                 <Grid item>

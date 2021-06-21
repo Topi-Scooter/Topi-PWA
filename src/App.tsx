@@ -18,11 +18,8 @@ function App() {
   
   return (
     <div className="App">
-      {scriptLoaded && (
-        <Map mapId={nightTheme} >
-        </Map>
-      )}
-      <BottomMenu></BottomMenu>
+      {scriptLoaded && ( <Map mapId={nightTheme} /> )}
+      <BottomMenu/>
     </div>
   );
 }
