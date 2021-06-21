@@ -36,12 +36,12 @@ const Map: React.FC<IMapProps> = ({ mapId }) => {
         const defaultAddress = new google.maps.LatLng(cmuPosition)
         initMap(zoom, defaultAddress)
     };
-    const startMap = (): void => {
+
+    useEffect((): void => {
         if (!map) {
             defualtMapStart()
         }
-    };
-    useEffect(startMap, [map]);
+    }, [map]);
 
     return (
         <div className="map-container">
