@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 
-type action = {
+export type action = {
     icon: React.ReactElement<SvgIconProps>;
     name: string;
     callback: any;
     color?: 'inherit' | 'primary' | 'secondary' | 'default';
     size?: 'small' | 'medium' | 'large';
+    hidden?: boolean; // hidden: undefinded = always show
 }
 
 interface Props {
@@ -22,6 +24,7 @@ interface Props {
     direction?: 'up' | 'down' | 'left' | 'right';
     size?: 'small' | 'medium' | 'large';
     color?: 'inherit' | 'primary' | 'secondary' | 'default';
+    showToolTip?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,8 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     speedDial: {
-      // TODO might need to rethink this style if we use this in another palce other than bottomMenu
-      marginRight: theme.spacing(-1),
     },
   }),
 );
@@ -41,8 +42,11 @@ const SpeedDialMenu = (props: Props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [hidden] = React.useState(false);
-    const [direction] = React.useState(props.direction);
   
+    useEffect(() => {
+      handleClose();
+    }, []);
+
     const handleOpen = () => {
       setOpen(true);
     };
@@ -52,6 +56,7 @@ const SpeedDialMenu = (props: Props) => {
     };
 
     return (
+      <ClickAwayListener onClickAway={handleClose}>
         <div className={props.className}>
             <SpeedDial
                 ariaLabel="SpeedDial"
@@ -61,26 +66,28 @@ const SpeedDialMenu = (props: Props) => {
                 onClose={handleClose}
                 onOpen={handleOpen}
                 open={open}
-                direction={direction}
                 FabProps={{ size: props.size, color: props.color}}
             >
-                {props.actions.map((action) => (
-                <SpeedDialAction
-                    key={action.name}
-                    icon={action.icon}
-                    tooltipTitle={action.name}
-                    FabProps={{ 
-                      size: action.size? action.size : 'small', 
-                      color: action.color
-                    }}
-                    onClick={()=>{
-                        handleClose();
-                        action.callback();
-                    }}
-                />
-                ))}
+                {props.actions.map((action) => { 
+                  return (!action.hidden ? 
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        tooltipOpen={props.showToolTip} // Tool tips should be one word verbs
+                        FabProps={{ 
+                          size: action.size? action.size : 'small', 
+                          color: action.color
+                        }}
+                        onClick={()=>{
+                            action.callback()
+                        }}
+                    /> : null
+                  )}
+                )}
             </SpeedDial>
         </div>
+      </ClickAwayListener>
     )
 }
 
