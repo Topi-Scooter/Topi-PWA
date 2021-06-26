@@ -33,8 +33,8 @@ export function MapPage(props: Props): ReactElement {
     
     return (
         <div>
-            <TopMenu/>
             {scriptLoaded && ( <Map mapId={mapStyle.current} /> )}
+            <TopMenu/>
             <BottomMenu  onChangeMapStyle={handleMapsStyleUpdate}/>
         </div>
     )
