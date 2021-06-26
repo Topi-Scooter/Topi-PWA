@@ -4,7 +4,7 @@ Author: Allen
 */
 import React, { ReactElement } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 
@@ -37,15 +37,19 @@ const useStyles = makeStyles((theme: Theme) =>
             pointerEvents: 'auto',
             margin: theme.spacing(3),
             marginTop: theme.spacing(-1),
+            
         },
         speedDial: {
             pointerEvents: 'auto',
             margin: theme.spacing(3),
             marginRight: theme.spacing(2),
         },
-        extendedText: {
-            marginLeft: theme.spacing(9),
-            marginRight: theme.spacing(9),
+        button: {
+            display: "block",
+            pointerEvents: 'auto',
+            margin: theme.spacing(3),
+            marginTop: theme.spacing(-1),
+            width: "65%",
         }
         
     }),
@@ -120,17 +124,15 @@ export function BottomMenu(props: Props): ReactElement {
                 </Grid>
 
                 <Grid container justify="center" alignItems="center" >
-                    <Fab 
-                        className={classes.fab} 
-                        variant="extended" 
+                    <Button 
+                        className={classes.button} 
+                        variant="contained" 
                         color="primary" 
                         size="large" 
                         onClick={isRiding ? handleCloseRide : handleRide}
                     >
-                        <span className={classes.extendedText}>
-                            {isRiding ? "End Ride" : "Ride" }
-                        </span>
-                    </Fab>
+                        {isRiding ? "End Ride" : "Ride" }
+                    </Button>
                 </Grid>
 
             </Grid>
