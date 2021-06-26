@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^6.0.0",
+    "node-sass": "^5.0.0",
     "sass-loader": "^12.1.0",
     "yarn": "^1.22.10"
   }
