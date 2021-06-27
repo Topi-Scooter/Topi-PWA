@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
             pointerEvents: 'auto',
             margin: theme.spacing(3),
             marginTop: theme.spacing(-1),
-            width: "65%",
+            width: "60%",
         }
         
     }),
