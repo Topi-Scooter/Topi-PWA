@@ -3,7 +3,6 @@ import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import './App.scss';
 import { MapPage } from './pages/MapPage'
 
-
 function App() {
   return (
     <div className="App">
