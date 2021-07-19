@@ -4,18 +4,18 @@ Author: Allen
 */
 import React, { ReactElement } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Button } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
-
-import SpeedDialMenu, { action } from './common/SpeedDialMenu';
-import SettingsIcon from '@material-ui/icons/Settings';
-import CloseIcon from '@material-ui/icons/Close';
-import HighlightIcon from '@material-ui/icons/Highlight';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import LockIcon from '@material-ui/icons/Lock';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import BugReportIcon from '@material-ui/icons/BugReport';
+import { Grid, Button, Fab } from '@material-ui/core';
+import SpeedDialMenu from './common/SpeedDialMenu';
+import {
+    Settings as SettingsIcon, 
+    Close as CloseIcon,
+    Highlight as HighlightIcon,
+    Brightness4 as Brightness4Icon,
+    Lock as LockIcon,
+    LockOpen as LockOpenIcon,
+    BugReport as BugReportIcon,
+    MyLocation as MyLocationIcon,
+} from '@material-ui/icons';
 
 interface Props {
     onChangeMapStyle: any;
