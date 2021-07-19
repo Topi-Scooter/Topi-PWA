@@ -8,7 +8,8 @@ function App() {
     <div className="App">
       <MapPage/>
       {/* TODO move sign out button*/}
-      <AmplifySignOut /> 
+      {/*<AmplifySignOut /> */}
+      
     </div>
   );
 }
