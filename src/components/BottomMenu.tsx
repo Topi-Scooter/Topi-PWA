@@ -2,7 +2,7 @@
 BottomMenu Options
 Author: Allen
 */
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Button, Fab } from '@material-ui/core';
 import SpeedDialMenu from './common/SpeedDialMenu';
@@ -16,6 +16,8 @@ import {
     BugReport as BugReportIcon,
     MyLocation as MyLocationIcon,
 } from '@material-ui/icons';
+import { AppContext } from '../state/context';
+import { setIsRiding } from '../state/reducer';
 
 interface Props {
     onChangeMapStyle: any;
@@ -55,21 +57,20 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-// TODO: need different actions depending on riding || !riding
-
 export function BottomMenu(props: Props): ReactElement {
+    const { state, dispatch } = useContext(AppContext);
     const classes = useStyles();
     const [isLocked, setIsLocked] = React.useState(false);
-    const [isRiding, setIsRiding] = React.useState(false);
+
     
     const handleRide = () => {
         // Call API to unlock scooter here
-        setIsRiding(true);
+        dispatch(setIsRiding(true))
     };
 
     const handleCloseRide = () => {
         // Call API to lock scooter here
-        setIsRiding(false);
+        dispatch(setIsRiding(false))
     };
 
     const toggleLock = () => {
@@ -87,13 +88,13 @@ export function BottomMenu(props: Props): ReactElement {
             icon: isLocked ? <LockOpenIcon/> : <LockIcon/>,
             name: isLocked ? "Unlock Scooter" : "Lock Scooter",
             callback: ()=>{ toggleLock() },
-            hidden: !isRiding,
+            hidden: !state.isRiding,
         },
         {
             icon: <HighlightIcon/>,
             name: "Toggle Scooter Light",
             callback: ()=>{},
-            hidden: !isRiding,
+            hidden: !state.isRiding,
         },
         {
             icon: <Brightness4Icon/>,
@@ -129,9 +130,9 @@ export function BottomMenu(props: Props): ReactElement {
                         variant="contained" 
                         color="primary" 
                         size="large" 
-                        onClick={isRiding ? handleCloseRide : handleRide}
+                        onClick={state.isRiding ? handleCloseRide : handleRide}
                     >
-                        {isRiding ? "End Ride" : "Ride" }
+                        {state.isRiding ? "End Ride" : "Ride" }
                     </Button>
                 </Grid>
 
