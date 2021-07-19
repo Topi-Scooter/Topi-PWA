@@ -16,7 +16,7 @@ import {
 
 
 interface Props {
-    
+    history: any;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,8 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function DrawerMenu(props: Props) : ReactElement {
-    // const { history } = props
+function DrawerMenu({ history }: Props) : ReactElement {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowHeight, setWindowHeight] = useState<number>();
@@ -55,29 +54,35 @@ function DrawerMenu(props: Props) : ReactElement {
     const topMenuList = [
         { 
             text: "Home",
-            icon: <HomeIcon/>
+            icon: <HomeIcon/>,
+            onClick: () => history.push('/'),
         },
         { 
             text: "Profile",
-            icon: <AccountBoxIcon/>
+            icon: <AccountBoxIcon/>,
+            onClick: () => history.push('/profile'),
         },
         { 
             text: "Payment Methods",
-            icon: <PaymentIcon/>
+            icon: <PaymentIcon/>,
+            onClick: () => history.push('/payment'),
         },
         { 
             text: "Settings",
-            icon: <SettingsIcon/>
+            icon: <SettingsIcon/>,
+            onClick: () => history.push('/settings'),
         },
     ];
     const bottomMenuList = [
         { 
             text: "About",
-            icon: <InfoIcon/>
+            icon: <InfoIcon/>,
+            onClick: () => history.push('/about'),
         },
         { 
             text: "Contact",
-            icon: <ContactSupportIcon/>
+            icon: <ContactSupportIcon/>,
+            onClick: () => history.push('/contact'),
         },
     ]
 
@@ -101,7 +106,7 @@ function DrawerMenu(props: Props) : ReactElement {
                     <Grid item>
                         {topMenuList.map((item, index) => (
                             <div>
-                                <ListItem button key={item.text} onClick={toggleDrawer(false)}>
+                                <ListItem button key={item.text} onClick={() => { toggleDrawer(false); item.onClick(); }}>
                                     <ListItemIcon>
                                         {item.icon}
                                     </ListItemIcon>
@@ -115,7 +120,7 @@ function DrawerMenu(props: Props) : ReactElement {
                         {bottomMenuList.map((item, index) => (
                             <div>
                                 <Divider/>
-                                <ListItem button key={item.text} onClick={toggleDrawer(false)}>
+                                <ListItem button key={item.text} onClick={() => { toggleDrawer(false); item.onClick(); }}>
                                     <ListItemIcon>
                                         {item.icon}
                                     </ListItemIcon>
