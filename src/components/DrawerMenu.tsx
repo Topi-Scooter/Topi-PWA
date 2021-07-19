@@ -11,7 +11,6 @@ import {
     Info as InfoIcon,
     ContactSupport as ContactSupportIcon,
     Settings as SettingsIcon,
-    ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 
 
