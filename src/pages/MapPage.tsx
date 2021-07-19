@@ -8,7 +8,7 @@ interface Props {
     
 }
 // TODO access api: https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-four/?e=gs2020&p=build-a-react-app-three
-export function MapPage(props: Props): ReactElement {
+export default function MapPage(props: Props): ReactElement {
     const googleMapsStyles = {
         default : "", // Empty string set map to default google street map
         dark : "a4157e9a5c74ff29",
