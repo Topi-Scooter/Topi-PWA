@@ -4,10 +4,12 @@ interface Props {
     
 }
 
-export default function basePage(props: Props): ReactElement {
+function SettingsPage(props: Props): ReactElement {
     return (
         <div>
-            
+            Settings Page
         </div>
     )
 }
+
+export default SettingsPage

@@ -7,7 +7,7 @@ interface Props {
 export default function PaymentPage(props: Props): ReactElement {
     return (
         <div>
-            
+            Payment Page
         </div>
     )
 }
