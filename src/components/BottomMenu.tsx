@@ -1,7 +1,3 @@
-/*
-BottomMenu Options
-Author: Allen
-*/
 import React, { ReactElement, useContext } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Button, Fab } from '@material-ui/core';

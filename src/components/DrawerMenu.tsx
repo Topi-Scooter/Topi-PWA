@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function DrawerMenu({ history }: Props) : ReactElement {
-    const classes = useStyles();
+function DrawerMenu(props: Props) : ReactElement {
+    const { history } = props;
+    const classes =  useStyles();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowHeight, setWindowHeight] = useState<number>();
 
@@ -87,7 +88,6 @@ function DrawerMenu({ history }: Props) : ReactElement {
     ]
 
     return (
-        
         <div className={classes.root}>
             <Fab size="small" color='primary' onClick={toggleDrawer(!isOpen)}>
                 <MenuIcon/>
