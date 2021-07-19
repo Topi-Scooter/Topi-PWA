@@ -7,8 +7,8 @@ export function AppReducer(state: AppState, action: StateActions): AppState {
     switch (action.type) {
         case ActionType.SetIsRiding:
             let newState = {
-                ...state,
-                isRiding: action.payload
+                ...state, // Copy existing state
+                isRiding: action.payload // Override isRiding with payload
             }
             return newState;
         default:
