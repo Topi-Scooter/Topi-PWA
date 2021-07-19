@@ -1,4 +1,5 @@
-Using AppState:
+# Using AppState:
+
     - Import AppContext.
         - i.e. ```import { AppContext } from '../state/context';```
     - Import your setter method from reducer.ts
@@ -14,10 +15,7 @@ Using AppState:
     - BottomMenu.tsx
 
     
-
-
-
-Adding to the AppState:
+# Adding to the AppState:
 
     state.ts
     - Add any new state variables to the propper state interface
@@ -38,8 +36,8 @@ Adding to the AppState:
     - Nothing to add here.
 
 
-Resources:
- - Blog: https://dev.to/hellomuthu23/how-to-use-usereducer-and-usecontext-hooks-with-typescript-in-react-14d1
- - Blog Code: https://codesandbox.io/s/quirky-grass-4f0yf?fontsize=14&hidenavigation=1&theme=dark
- - useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk
- - React hooks overview: https://www.youtube.com/watch?v=TNhaISOUy6Q
+# Resources:
+    - Blog: https://dev.to/hellomuthu23/how-to-use-usereducer-and-usecontext-hooks-with-typescript-in-react-14d1
+    - Blog Code: https://codesandbox.io/s/quirky-grass-4f0yf?fontsize=14&hidenavigation=1&theme=dark
+    - useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk
+    - React hooks overview: https://www.youtube.com/watch?v=TNhaISOUy6Q
