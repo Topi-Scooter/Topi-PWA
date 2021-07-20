@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react'
+// import the stripe API
+const 
 
 interface Props {
     
