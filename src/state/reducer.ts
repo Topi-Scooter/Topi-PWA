@@ -1,16 +1,20 @@
 // https://codesandbox.io/s/quirky-grass-4f0yf?fontsize=14&hidenavigation=1&theme=dark&file=/src/state/reducer.ts
 // https://www.youtube.com/watch?v=kK_Wqx3RnHk
 import { AppState } from './state'
-import { ActionType, SetIsRiding, StateActions } from './actions'
+import { ActionType, SetIsRiding, SetMapLoaded, StateActions } from './actions'
 
 export function AppReducer(state: AppState, action: StateActions): AppState {
     switch (action.type) {
         case ActionType.SetIsRiding:
-            let newState = {
+            return {
                 ...state, // Copy existing state
                 isRiding: action.payload // Override isRiding with payload
             }
-            return newState;
+        case ActionType.SetMapLoaded:
+            return {
+                ...state, // Copy existing state
+                mapIsLoaded: action.payload // Override isRiding with payload
+            }
         default:
             return state;
     }
@@ -19,4 +23,9 @@ export function AppReducer(state: AppState, action: StateActions): AppState {
 export const setIsRiding = (isRiding: boolean): SetIsRiding => ({
     type: ActionType.SetIsRiding,
     payload: isRiding,
+})
+
+export const setMapLoaded = (mapIsLoaded: boolean): SetMapLoaded => ({
+    type: ActionType.SetMapLoaded,
+    payload: mapIsLoaded,
 })

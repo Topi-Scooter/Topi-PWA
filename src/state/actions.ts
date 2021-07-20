@@ -3,6 +3,7 @@ import { AppState } from './state';
 
 export enum ActionType {
     SetIsRiding,
+    SetMapLoaded,
 }
 
 export interface SetIsRiding {
@@ -10,4 +11,9 @@ export interface SetIsRiding {
     payload: boolean;
 }
 
-export type StateActions = SetIsRiding;
+export interface SetMapLoaded {
+    type: ActionType.SetMapLoaded;
+    payload: boolean;
+}
+
+export type StateActions = SetIsRiding | SetMapLoaded;
