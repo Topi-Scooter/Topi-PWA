@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { TopMenu } from '../components/TopMenu'
 
 interface Props {
     
@@ -7,6 +8,7 @@ interface Props {
 function SettingsPage(props: Props): ReactElement {
     return (
         <div>
+            <TopMenu/>
             Settings Page
         </div>
     )
