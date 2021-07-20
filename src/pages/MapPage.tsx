@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef, ReactElement } from 'react';
+import React, { useEffect, useState, useRef, ReactElement, useContext } from 'react';
 import Map from '../components/Map';
 import { loadMapApi } from '../utils/GoogleMapsUtils';
 import { BottomMenu } from '../components/BottomMenu';
 import { TopMenu } from '../components/TopMenu';
+import { AppContext } from '../state/context';
+import { setMapLoaded } from '../state/reducer';
 
 interface Props {
     
@@ -14,7 +16,7 @@ export default function MapPage(props: Props): ReactElement {
         dark : "a4157e9a5c74ff29",
         light : "", // TODO create light style
     }
-    const [scriptLoaded, setScriptLoaded] = useState(false);
+    const { state, dispatch } = useContext(AppContext)
     const mapStyle = useRef<string>(googleMapsStyles.dark)
     
     const handleMapsStyleUpdate = (newStyle:string) => {
@@ -27,13 +29,19 @@ export default function MapPage(props: Props): ReactElement {
         const googleMapScript = loadMapApi();
         // validate that the maps script has been loaded to the dom
         googleMapScript.addEventListener('load', function () {
-            setScriptLoaded(true);
+            dispatch(setMapLoaded(true));
         });
-    }, []);
+
+        return () => { //cleanup
+            googleMapScript.removeEventListener('load', function () {
+                dispatch(setMapLoaded(true));
+            });
+        }
+    }, [dispatch]);
     
     return (
         <div>
-            {scriptLoaded && ( <Map mapId={mapStyle.current} /> )}
+            {state.app.mapIsLoaded && ( <Map mapId={mapStyle.current} /> )}
             <TopMenu/>
             <BottomMenu  onChangeMapStyle={handleMapsStyleUpdate}/>
         </div>

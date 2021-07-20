@@ -11,7 +11,6 @@ import {
     Info as InfoIcon,
     ContactSupport as ContactSupportIcon,
     Settings as SettingsIcon,
-    ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 
 
@@ -29,8 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function DrawerMenu({ history }: Props) : ReactElement {
-    const classes = useStyles();
+function DrawerMenu(props: Props) : ReactElement {
+    const { history } = props;
+    const classes =  useStyles();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowHeight, setWindowHeight] = useState<number>();
 
@@ -87,7 +87,6 @@ function DrawerMenu({ history }: Props) : ReactElement {
     ]
 
     return (
-        
         <div className={classes.root}>
             <Fab size="small" color='primary' onClick={toggleDrawer(!isOpen)}>
                 <MenuIcon/>
@@ -99,11 +98,12 @@ function DrawerMenu({ history }: Props) : ReactElement {
             >      
                 <Grid 
                     container direction="column" 
+                    key={'parentGrid'}
                     justify="space-between" 
                     style={{height: windowHeight}} 
                     className={classes.drawer}
                 >
-                    <Grid item>
+                    <Grid item key={'topMenuList'}>
                         {topMenuList.map((item, index) => (
                             <div>
                                 <ListItem button key={item.text} onClick={() => { toggleDrawer(false); item.onClick(); }}>
@@ -116,7 +116,7 @@ function DrawerMenu({ history }: Props) : ReactElement {
                             </div>
                         ))}
                     </Grid>
-                    <Grid item>
+                    <Grid item key={'bottomMenuList'}>
                         {bottomMenuList.map((item, index) => (
                             <div>
                                 <Divider/>
@@ -128,7 +128,7 @@ function DrawerMenu({ history }: Props) : ReactElement {
                                 </ListItem>
                             </div>
                         ))}
-                        <div >
+                        <div key={'Sign Out'}>
                             {/* TODO: Might update to use MUI's <ExitToAppIcon/> */}
                             <AmplifySignOut onClick={toggleDrawer(false)}/>
                         </div>
