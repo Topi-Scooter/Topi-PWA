@@ -84,13 +84,13 @@ export function BottomMenu(props: Props): ReactElement {
             icon: isLocked ? <LockOpenIcon/> : <LockIcon/>,
             name: isLocked ? "Unlock Scooter" : "Lock Scooter",
             callback: ()=>{ toggleLock() },
-            hidden: !state.isRiding,
+            hidden: !state.user.isRiding,
         },
         {
             icon: <HighlightIcon/>,
             name: "Toggle Scooter Light",
             callback: ()=>{},
-            hidden: !state.isRiding,
+            hidden: !state.user.isRiding,
         },
         {
             icon: <Brightness4Icon/>,
@@ -126,9 +126,9 @@ export function BottomMenu(props: Props): ReactElement {
                         variant="contained" 
                         color="primary" 
                         size="large" 
-                        onClick={state.isRiding ? handleCloseRide : handleRide}
+                        onClick={state.user.isRiding ? handleCloseRide : handleRide}
                     >
-                        {state.isRiding ? "End Ride" : "Ride" }
+                        {state.user.isRiding ? "End Ride" : "Ride" }
                     </Button>
                 </Grid>
 
