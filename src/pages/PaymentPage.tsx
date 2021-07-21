@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { TopMenu } from '../components/TopMenu'
+// import the stripe API
 
 interface Props {
     

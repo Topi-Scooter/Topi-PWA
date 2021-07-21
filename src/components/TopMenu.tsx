@@ -29,7 +29,7 @@ export const TopMenu = (props: Props) => {
     const classes = useStyles();
     const { state } = useContext(AppContext);
 
-    if (state.isRiding) {
+    if (state.user.isRiding) {
         return (
             <RidingInfoCard/>
         )
@@ -43,6 +43,4 @@ export const TopMenu = (props: Props) => {
             </div>
         )
     }
-
-    
 }

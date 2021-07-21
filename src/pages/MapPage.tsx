@@ -41,7 +41,7 @@ export default function MapPage(props: Props): ReactElement {
     
     return (
         <div>
-            {state.mapIsLoaded && ( <Map mapId={mapStyle.current} /> )}
+            {state.app.mapIsLoaded && ( <Map mapId={mapStyle.current} /> )}
             <TopMenu/>
             <BottomMenu  onChangeMapStyle={handleMapsStyleUpdate}/>
         </div>
