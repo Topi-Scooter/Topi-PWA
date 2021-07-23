@@ -128,7 +128,7 @@ export function BottomMenu(props: Props): ReactElement {
                         size="large" 
                         onClick={state.user.isRiding ? handleCloseRide : handleRide}
                     >
-                        {state.user.isRiding ? "End Ride" : "Ride" }
+                        {state.user.isRiding ? "End Ride" : "Ride Ride" }
                     </Button>
                 </Grid>
 
