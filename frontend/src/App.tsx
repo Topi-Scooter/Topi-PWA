@@ -10,7 +10,7 @@ import { AppContext } from './state/context';
 
 function App() { 
   const [state, dispatch] = useReducer(AppReducer, initialAppState)
-  // Post repo migration test change
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Router>
