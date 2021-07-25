@@ -15,6 +15,10 @@ import {
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
 
+import { API } from "aws-amplify"
+import * as mutations from '../graphql/mutations'
+import * as queries from '../graphql/queries';
+
 interface Props {
     onChangeMapStyle: any;
 } 
@@ -59,12 +63,12 @@ export function BottomMenu(props: Props): ReactElement {
     const [isLocked, setIsLocked] = React.useState(false);
 
     
-    const handleRide = () => {
+    const handleRide = async () => {
         // Call API to unlock scooter here
         dispatch(setIsRiding(true))
     };
 
-    const handleCloseRide = () => {
+    const handleCloseRide = async () => {
         // Call API to lock scooter here
         dispatch(setIsRiding(false))
     };
@@ -128,7 +132,7 @@ export function BottomMenu(props: Props): ReactElement {
                         size="large" 
                         onClick={state.user.isRiding ? handleCloseRide : handleRide}
                     >
-                        {state.user.isRiding ? "End Ride" : "Ride RIDE" } 
+                        {state.user.isRiding ? "End Ride" : "Ride" } 
                         {/* Post repo migration test change */}
                     </Button>
                 </Grid>
