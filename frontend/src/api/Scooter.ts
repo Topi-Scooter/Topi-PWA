@@ -19,6 +19,7 @@ export async function getAllScooter() {
 
 // mutations
 export async function createScooter(id: string) {
+    console.log(id)
     const scooterDetails:apiTypes.CreateScooterInput = {
         id: id,
         isInUse: false,
