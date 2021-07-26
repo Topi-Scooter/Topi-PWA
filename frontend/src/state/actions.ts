@@ -4,6 +4,7 @@ import { BatteryPercentages, State } from './state';
 export enum ActionType {
     /* --User State Actions-- */
     SetIsRiding,
+    SetIsAdmin,
 
     /* --Scooter State Actions-- */
     SetBatteryLevel, // TODO: UI wont update this, server will | Look into this
@@ -16,6 +17,10 @@ export enum ActionType {
 /* --User State Actions-- */
 export interface SetIsRiding {
     type: ActionType.SetIsRiding;
+    payload: boolean;
+}
+export interface SetIsAdmin {
+    type: ActionType.SetIsAdmin;
     payload: boolean;
 }
 
@@ -31,4 +36,4 @@ export interface SetMapLoaded {
     payload: boolean;
 }
 
-export type StateActions = SetIsRiding | SetMapLoaded | SetBatteryLevel;
+export type StateActions = SetIsRiding | SetMapLoaded | SetBatteryLevel | SetIsAdmin;

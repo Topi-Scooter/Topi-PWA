@@ -96,21 +96,28 @@ export const schema = {
                     "name": "isInUse",
                     "isArray": false,
                     "type": "Boolean",
-                    "isRequired": false,
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isOnline": {
+                    "name": "isOnline",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "isLocked": {
                     "name": "isLocked",
                     "isArray": false,
                     "type": "Boolean",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "batteryPercent": {
                     "name": "batteryPercent",
                     "isArray": false,
                     "type": "Float",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -252,5 +259,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "77a5bdaca922362599742fc999b517e5"
+    "version": "d45a00f9be9c27b4d06674f73b8984bc"
 };

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useContext, useEffect, useState } from 'react'
 import { SwipeableDrawer, Fab, Divider, ListItem, ListItemIcon, ListItemText, Grid } from '@material-ui/core'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
@@ -10,8 +10,11 @@ import {
     Home as HomeIcon,
     Info as InfoIcon,
     ContactSupport as ContactSupportIcon,
+    SupervisorAccount as SupervisorAccountIcon,
     Settings as SettingsIcon,
+    SupervisorAccount,
 } from '@material-ui/icons';
+import { AppContext } from '../state/context';
 
 
 interface Props {
@@ -33,6 +36,8 @@ function DrawerMenu(props: Props) : ReactElement {
     const classes =  useStyles();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [windowHeight, setWindowHeight] = useState<number>();
+    const { state, dispatch } = useContext(AppContext);
+
 
     useEffect(() => {
         const {innerHeight: height} = window;
@@ -85,6 +90,15 @@ function DrawerMenu(props: Props) : ReactElement {
             onClick: () => history.push('/contact'),
         },
     ]
+    if (state.user.isAdmin) {
+        topMenuList.push(
+            { 
+                text: "Admin Panel",
+                icon: <SupervisorAccountIcon/>,
+                onClick: () => history.push('/admin'),
+            },
+        )
+    }
 
     return (
         <div className={classes.root}>

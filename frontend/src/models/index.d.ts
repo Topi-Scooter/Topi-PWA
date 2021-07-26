@@ -28,9 +28,10 @@ export declare class Ride {
 
 export declare class Scooter {
   readonly id: string;
-  readonly isInUse?: boolean;
-  readonly isLocked?: boolean;
-  readonly batteryPercent?: number;
+  readonly isInUse: boolean;
+  readonly isOnline: boolean;
+  readonly isLocked: boolean;
+  readonly batteryPercent: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Scooter, ScooterMetaData>);

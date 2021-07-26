@@ -4,3 +4,4 @@ export {default as PaymentPage} from "./PaymentPage";
 export {default as SettingsPage} from "./SettingsPage";
 export {default as AboutPage} from "./AboutPage";
 export {default as ContactPage} from "./ContactPage";
+export {default as AdminPage} from "./AdminPage";

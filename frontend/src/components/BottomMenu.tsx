@@ -15,10 +15,6 @@ import {
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
 
-import { API } from "aws-amplify"
-import * as mutations from '../graphql/mutations'
-import * as queries from '../graphql/queries';
-
 interface Props {
     onChangeMapStyle: any;
 } 

@@ -12,6 +12,7 @@ export enum BatteryPercentages {
 
 export type UserState = {
     isRiding: boolean;
+    isAdmin: boolean;
 };
 export type ScooterState = {
     batteryLevel: BatteryPercentages;
@@ -30,6 +31,7 @@ export interface State {
 export const initialAppState: State = {
     user: {
         isRiding: false,
+        isAdmin: false,
     },
     scooter: {
         batteryLevel: BatteryPercentages.BatteryFull,

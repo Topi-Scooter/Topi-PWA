@@ -9,6 +9,7 @@ export const onCreateRide = /* GraphQL */ `
       scooterId {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version
@@ -56,6 +57,7 @@ export const onUpdateRide = /* GraphQL */ `
       scooterId {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version
@@ -103,6 +105,7 @@ export const onDeleteRide = /* GraphQL */ `
       scooterId {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version
@@ -153,6 +156,7 @@ export const onCreateUser = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -199,6 +203,7 @@ export const onUpdateUser = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -245,6 +250,7 @@ export const onDeleteUser = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -286,6 +292,7 @@ export const onCreateScooter = /* GraphQL */ `
     onCreateScooter {
       id
       isInUse
+      isOnline
       isLocked
       batteryPercent
       _version
@@ -301,6 +308,7 @@ export const onUpdateScooter = /* GraphQL */ `
     onUpdateScooter {
       id
       isInUse
+      isOnline
       isLocked
       batteryPercent
       _version
@@ -316,6 +324,7 @@ export const onDeleteScooter = /* GraphQL */ `
     onDeleteScooter {
       id
       isInUse
+      isOnline
       isLocked
       batteryPercent
       _version

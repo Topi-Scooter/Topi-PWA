@@ -20,6 +20,7 @@ export const syncRides = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -59,6 +60,7 @@ export const getRide = /* GraphQL */ `
       scooterId {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version
@@ -111,6 +113,7 @@ export const listRides = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -192,6 +195,7 @@ export const getUser = /* GraphQL */ `
         scooterId {
           id
           isInUse
+          isOnline
           isLocked
           batteryPercent
           _version
@@ -277,6 +281,7 @@ export const syncScooters = /* GraphQL */ `
       items {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version
@@ -295,6 +300,7 @@ export const getScooter = /* GraphQL */ `
     getScooter(id: $id) {
       id
       isInUse
+      isOnline
       isLocked
       batteryPercent
       _version
@@ -315,6 +321,7 @@ export const listScooters = /* GraphQL */ `
       items {
         id
         isInUse
+        isOnline
         isLocked
         batteryPercent
         _version

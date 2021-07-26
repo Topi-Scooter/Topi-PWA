@@ -1,7 +1,7 @@
 // https://codesandbox.io/s/quirky-grass-4f0yf?fontsize=14&hidenavigation=1&theme=dark&file=/src/state/reducer.ts
 // https://www.youtube.com/watch?v=kK_Wqx3RnHk
 import { BatteryPercentages, State } from './state'
-import { ActionType, SetBatteryLevel, SetIsRiding, SetMapLoaded, StateActions } from './actions'
+import { ActionType, SetBatteryLevel, SetIsAdmin, SetIsRiding, SetMapLoaded, StateActions } from './actions'
 
 export function AppReducer(state: State, action: StateActions): State {
     switch (action.type) {
@@ -15,6 +15,14 @@ export function AppReducer(state: State, action: StateActions): State {
                     isRiding: action.payload // Override isRiding with payload
                 }   
             }
+        case ActionType.SetIsAdmin:
+            return {
+                ...state, // Copy existing state
+                user: {
+                    ...state.user,
+                    isAdmin: action.payload 
+                }   
+            }
 
         /* --Scooter State Cases-- */
         case ActionType.SetBatteryLevel:
@@ -22,7 +30,7 @@ export function AppReducer(state: State, action: StateActions): State {
                 ...state, // Copy existing state
                 scooter: {
                     ...state.scooter,
-                    batteryLevel: action.payload // Override isRiding with payload
+                    batteryLevel: action.payload 
                 }
             }
 
@@ -47,6 +55,10 @@ export function AppReducer(state: State, action: StateActions): State {
 export const setIsRiding = (isRiding: boolean): SetIsRiding => ({
     type: ActionType.SetIsRiding,
     payload: isRiding,
+})
+export const setIsAdmin = (isAdmin: boolean): SetIsAdmin => ({
+    type: ActionType.SetIsAdmin,
+    payload: isAdmin,
 })
 
 /* --Scooter State Setter Functions-- */
