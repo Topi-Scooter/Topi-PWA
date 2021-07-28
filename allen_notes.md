@@ -9,10 +9,12 @@ https://guides.github.com/features/mastering-markdown/
     - https://youtu.be/OvPrUQ3gPtw?t=470
 - Design Patterns: https://www.youtube.com/watch?v=lG6Z0FQj_SI
 - Adv. react Hooks: https://www.youtube.com/watch?v=YKmiLcXiMMo&t=214s
-- Whole app styling: https://www.youtube.com/watch?v=mu8-u7V7Z8s
 - React/Mui: https://www.youtube.com/watch?v=vyJU9efvUtQ
 - MUI Avatars (profiles): https://material-ui.com/components/avatars/
-
+- App Theme:
+  - Whole app mui theme: https://www.youtube.com/watch?v=H_PO_GY4xXU
+  - MUI Themeing: https://www.youtube.com/watch?v=Q4o0GmfNpJc
+  - Whole app styling: https://www.youtube.com/watch?v=mu8-u7V7Z8s
 
 # **Backend:**
 AWS Toolkit: https://www.youtube.com/watch?v=DA3hlLxTl-8
