@@ -21,6 +21,8 @@ export const onCreateRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -69,6 +71,8 @@ export const onUpdateRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -117,6 +121,8 @@ export const onDeleteRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -150,6 +156,8 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String!) {
     onCreateUser(owner: $owner) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -168,6 +176,8 @@ export const onCreateUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -197,6 +207,8 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($owner: String!) {
     onUpdateUser(owner: $owner) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -215,6 +227,8 @@ export const onUpdateUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -244,6 +258,8 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($owner: String!) {
     onDeleteUser(owner: $owner) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -262,6 +278,8 @@ export const onDeleteUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted

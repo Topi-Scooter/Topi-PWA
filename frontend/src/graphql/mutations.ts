@@ -24,6 +24,8 @@ export const createRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -75,6 +77,8 @@ export const updateRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -126,6 +130,8 @@ export const deleteRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -162,6 +168,8 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -180,6 +188,8 @@ export const createUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -212,6 +222,8 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -230,6 +242,8 @@ export const updateUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -262,6 +276,8 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -280,6 +296,8 @@ export const deleteUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted

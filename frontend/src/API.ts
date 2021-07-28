@@ -82,6 +82,8 @@ export type Scooter = {
 export type User = {
   __typename: "User",
   id: string,
+  username: string,
+  email: string,
   isRiding: boolean,
   rideHistory?:  Array<Ride > | null,
   _version: number,
@@ -106,19 +108,51 @@ export type DeleteRideInput = {
 
 export type CreateUserInput = {
   id?: string | null,
+  username: string,
+  email: string,
   isRiding: boolean,
   _version?: number | null,
 };
 
 export type ModelUserConditionInput = {
+  username?: ModelStringInput | null,
+  email?: ModelStringInput | null,
   isRiding?: ModelBooleanInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
 };
 
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type UpdateUserInput = {
   id: string,
+  username?: string | null,
+  email?: string | null,
   isRiding?: boolean | null,
   _version?: number | null,
 };
@@ -186,16 +220,6 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
 export type ModelRideConnection = {
   __typename: "ModelRideConnection",
   items?:  Array<Ride | null > | null,
@@ -205,6 +229,8 @@ export type ModelRideConnection = {
 
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
+  username?: ModelStringInput | null,
+  email?: ModelStringInput | null,
   isRiding?: ModelBooleanInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
@@ -262,6 +288,8 @@ export type CreateRideMutation = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -318,6 +346,8 @@ export type UpdateRideMutation = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -374,6 +404,8 @@ export type DeleteRideMutation = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -413,6 +445,8 @@ export type CreateUserMutation = {
   createUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -434,6 +468,8 @@ export type CreateUserMutation = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -468,6 +504,8 @@ export type UpdateUserMutation = {
   updateUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -489,6 +527,8 @@ export type UpdateUserMutation = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -523,6 +563,8 @@ export type DeleteUserMutation = {
   deleteUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -544,6 +586,8 @@ export type DeleteUserMutation = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -662,6 +706,8 @@ export type SyncRidesQuery = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -708,6 +754,8 @@ export type GetRideQuery = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -767,6 +815,8 @@ export type ListRidesQuery = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -801,6 +851,8 @@ export type SyncUsersQuery = {
     items?:  Array< {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -834,6 +886,8 @@ export type GetUserQuery = {
   getUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -855,6 +909,8 @@ export type GetUserQuery = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -892,6 +948,8 @@ export type ListUsersQuery = {
     items?:  Array< {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -1013,6 +1071,8 @@ export type OnCreateRideSubscription = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -1064,6 +1124,8 @@ export type OnUpdateRideSubscription = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -1115,6 +1177,8 @@ export type OnDeleteRideSubscription = {
     user:  {
       __typename: "User",
       id: string,
+      username: string,
+      email: string,
       isRiding: boolean,
       rideHistory?:  Array< {
         __typename: "Ride",
@@ -1153,6 +1217,8 @@ export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -1174,6 +1240,8 @@ export type OnCreateUserSubscription = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -1207,6 +1275,8 @@ export type OnUpdateUserSubscription = {
   onUpdateUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -1228,6 +1298,8 @@ export type OnUpdateUserSubscription = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,
@@ -1261,6 +1333,8 @@ export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
     id: string,
+    username: string,
+    email: string,
     isRiding: boolean,
     rideHistory?:  Array< {
       __typename: "Ride",
@@ -1282,6 +1356,8 @@ export type OnDeleteUserSubscription = {
       user:  {
         __typename: "User",
         id: string,
+        username: string,
+        email: string,
         isRiding: boolean,
         _version: number,
         _deleted?: boolean | null,

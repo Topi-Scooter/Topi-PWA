@@ -32,6 +32,8 @@ export const syncRides = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -72,6 +74,8 @@ export const getRide = /* GraphQL */ `
       isActive
       user {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -125,6 +129,8 @@ export const listRides = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -161,6 +167,8 @@ export const syncUsers = /* GraphQL */ `
     ) {
       items {
         id
+        username
+        email
         isRiding
         rideHistory {
           id
@@ -189,6 +197,8 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
+      username
+      email
       isRiding
       rideHistory {
         id
@@ -207,6 +217,8 @@ export const getUser = /* GraphQL */ `
         isActive
         user {
           id
+          username
+          email
           isRiding
           _version
           _deleted
@@ -241,6 +253,8 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        username
+        email
         isRiding
         rideHistory {
           id

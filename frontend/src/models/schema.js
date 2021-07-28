@@ -200,6 +200,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "isRiding": {
                     "name": "isRiding",
                     "isArray": false,
@@ -259,5 +273,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d45a00f9be9c27b4d06674f73b8984bc"
+    "version": "68e091754e3f7b906f7fd6726fdeb15a"
 };
