@@ -1,3 +1,5 @@
+// Docs: https://storksnestblog.wordpress.com/2020/08/16/setting-up-google-maps-with-react-typescript/
+// Docs: https://storksnestblog.wordpress.com/2020/08/16/setting-up-google-maps-with-react-typescript/
 export const loadMapApi = () => {
     const mapsURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&language=en&region=US&v=quarterly`;    
     const scripts = document.getElementsByTagName('script');

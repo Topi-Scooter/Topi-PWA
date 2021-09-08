@@ -1,3 +1,4 @@
+// Docs: https://storksnestblog.wordpress.com/2020/08/16/setting-up-google-maps-with-react-typescript/
 import React, {useEffect, useRef, useState} from 'react';
 import './Map.scss';
 
