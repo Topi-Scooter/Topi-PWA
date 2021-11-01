@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Button, Fab } from '@material-ui/core';
 import SpeedDialMenu from './common/SpeedDialMenu';
@@ -73,6 +73,16 @@ export function BottomMenu(props: Props): ReactElement {
         setIsLocked(!isLocked);
     };
 
+		const [theme, setTheme] = useState('light');
+	
+		const toggleTheme = () => {
+			if (theme === 'light') {
+				setTheme('dark');
+			} else {
+				setTheme('light');
+			}
+		}
+		
     const speedDialActions= 
     [
         {
@@ -95,7 +105,9 @@ export function BottomMenu(props: Props): ReactElement {
         {
             icon: <Brightness4Icon/>,
             name: "Toggle Dark Mode",
-            callback: ()=>{props.onChangeMapStyle('dark')},
+            callback: ()=>{
+							toggleTheme
+            },
         },
     ]
 
