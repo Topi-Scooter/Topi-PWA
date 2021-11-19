@@ -11,6 +11,7 @@ interface Props {
 }
 // TODO access api: https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/module-four/?e=gs2020&p=build-a-react-app-three
 export default function MapPage(props: Props): ReactElement {
+    // const [distanceInKm, setDistanceInKm] = useState<number>(-1);
     const googleMapsStyles = {
         default : "", // Empty string set map to default google street map
         dark : "a4157e9a5c74ff29",
@@ -41,7 +42,11 @@ export default function MapPage(props: Props): ReactElement {
     
     return (
         <div>
-            {state.app.mapIsLoaded && ( <Map mapId={mapStyle.current} /> )}
+            {state.app.mapIsLoaded && ( <Map
+                  mapType={google.maps.MapTypeId.ROADMAP}
+                  mapTypeControl={true}
+                //   setDistanceInKm={setDistanceInKm}
+                />)}
             <TopMenu/>
             <BottomMenu  onChangeMapStyle={handleMapsStyleUpdate}/>
         </div>

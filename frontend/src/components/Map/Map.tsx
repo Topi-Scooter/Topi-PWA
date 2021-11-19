@@ -1,128 +1,160 @@
-// Docs: https://storksnestblog.wordpress.com/2020/08/16/setting-up-google-maps-with-react-typescript/
 import React, {useEffect, useRef, useState} from 'react';
-import { markAsUntransferable } from 'worker_threads';
 import './Map.scss';
 
-interface IMapProps {
-    mapId: string;
+interface IMap {
+    mapType: google.maps.MapTypeId;
+    mapTypeControl?: boolean;
+    // setDistanceInKm: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface IMarker {
+    address: string;
+    latitude: number;
+    longitude: number;
 }
 
 type GoogleLatLng = google.maps.LatLng;
 type GoogleMap = google.maps.Map;
-const cmuPosition = { lat: 39.081098, lng: -108.554785 }; // TODO move to better place
-const zoom = 16; // TODO move to better place
-const bikeIcon: any = {url: 'https://img.icons8.com/ios-glyphs/30/000000/person-male.png'}
-                    // scaledSize: new window.google.maps.Size(25, 25)}
+type GoogleMarker = google.maps.Marker;
+type GooglePolyline = google.maps.Polyline;
 
-async function getUserPosition(){
-    navigator.geolocation.getCurrentPosition(function(userPosition) {
-        // console.log(userPosition);
-        userLocation = userPosition;
-    });
-}
-
-var userLocation: any = getUserPosition();
-
-async function getBikeLocations(){
-    // get bike locations from dynamodb
-    const AWS = require("aws-sdk");
-    
-    AWS.config.update({region: "us-east-2",
-                       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-                       secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
-                    })
-        
-    const ddb = new AWS.DynamoDB.DocumentClient();
-    const TABLE_NAME = "Bikes";
-    
-    try{
-        const ddb_results = await ddb.scan({
-        TableName: TABLE_NAME
-        }).promise();  
-        // console.log(ddb_results.Items);
-        bikeLocations = ddb_results.Items;
-    }catch (error) {
-        console.log(error);
-    }
-};
-
-var bikeLocations: any = getBikeLocations();
-
-const Map: React.FC<IMapProps> = ({ mapId }) => {
+const Map: React.FC<IMap> = ({ mapType, mapTypeControl = false}) => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [map, setMap] = useState<GoogleMap>();
+    const [marker, setMarker] = useState<IMarker>();
+    const [homeMarker, setHomeMarker] = useState<GoogleMarker>();
+    const [googleMarkers, setGoogleMarkers] = useState<GoogleMarker[]>([]);
+    const [listenerIdArray, setListenerIdArray] = useState<any[]>([]);
+    const [LastLineHook, setLastLineHook] = useState<GooglePolyline>();
 
-    var initMap = (zoomLevel: number, address: GoogleLatLng): void => {
+    const startMap = (): void => {
+        if (!map) {
+            defaultMapStart();
+        } else {
+            const homeLocation = new google.maps.LatLng(39.081098, -108.554785);
+            setHomeMarker(addHomeMarker(homeLocation));
+            addUserMarker();
+            addBikeMarkers();
+        }
+    };
+    
+    useEffect(startMap, [map]);
+
+    const defaultMapStart = (): void => {
+        const defaultAddress = new google.maps.LatLng(39.081098, -108.554785);
+        initMap(16, defaultAddress);
+    };
+    
+    const userIcon: any = {url: 'https://img.icons8.com/ios-glyphs/30/000000/person-male.png',
+                           scaledSize: new window.google.maps.Size(25, 25)}
+    const bikeIcon: any = {url: 'https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/50/000000/external-bike-vacation-vitaliy-gorbachev-fill-vitaly-gorbachev.png',
+                           scaledSize: new window.google.maps.Size(25, 25)}
+    const demoIcon: any = {url: 'https://img.icons8.com/material-rounded/24/000000/ok--v1.png',
+                           scaledSize: new window.google.maps.Size(25, 25)}
+
+    const addHomeMarker = (location: GoogleLatLng): GoogleMarker => {
+        const homeMarkerConst:GoogleMarker = new google.maps.Marker({
+            position: location,
+            map: map,
+            icon: demoIcon
+        });
+
+        homeMarkerConst.addListener('click', () => {
+            map?.panTo(location);
+            map?.setZoom(16);
+        });
+
+        return homeMarkerConst;
+    };
+
+    const addUserMarker = (): GoogleMarker => {
+        async function getUserPosition(){
+                    navigator.geolocation.getCurrentPosition(function(userPosition) {
+                        const userLocation = new google.maps.LatLng(userPosition.coords.latitude, userPosition.coords.longitude);
+                        const userMarker:GoogleMarker = new google.maps.Marker({
+                            position: userLocation,
+                            map: map,
+                            icon: userIcon
+                        })
+
+                        userMarker.addListener('click', () => {
+                            map?.panTo(userLocation);
+                            map?.setZoom(16);
+                        });
+
+                        return userMarker;
+                    });
+                }
+                var userLocation: any = getUserPosition();
+                // console.log("userLocation function completed, Results: ", userLocation);
+                return userLocation;
+    };
+
+    const addBikeMarkers = (): void => {
+        async function getBikeLocations(){
+                    // get bike locations from dynamodb
+                    const AWS = require("aws-sdk");
+                    
+                    AWS.config.update({region: "us-east-2",
+                                       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+                                       secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
+                                    })
+                        
+                    const ddb = new AWS.DynamoDB.DocumentClient();
+                    const TABLE_NAME = "Bikes";
+                    
+                    try{
+                        const ddb_results = await ddb.scan({
+                        TableName: TABLE_NAME
+                        }).promise();  
+                        console.log("bikeLocations", ddb_results.Items);
+                        bikeLocations = ddb_results.Items;
+                        bikeLocations.map(function(bike: any, index: any){
+                            // console.log("key: ", index, "value: ", bike);
+                            var bikeLocation = new google.maps.LatLng(bike.lat, bike.lng);
+                            
+                            const bikeMarker:GoogleMarker = new google.maps.Marker({
+                                position: bikeLocation,
+                                map: map,
+                                icon: bikeIcon
+                            })
+
+                            bikeMarker.addListener('click', () => {
+                                map?.panTo(bikeLocation);
+                                map?.setZoom(16);
+                            });
+
+                            return bikeMarker;
+                        });
+        
+                    }catch (error) {
+                        console.log(error);
+                    }
+                };
+                var bikeLocations: any = getBikeLocations();  
+    }
+
+    const initMap = (zoomLevel: number, address: GoogleLatLng): void => {
         if (ref.current) {
             setMap(
                 new google.maps.Map(ref.current, {
                     zoom: zoomLevel,
                     center: address,
-                    mapId: mapId,
-                    mapTypeControl: false,
+                    mapTypeControl: mapTypeControl,
                     streetViewControl: false,
-                    scaleControl: false,
                     rotateControl: false,
+                    scaleControl: true,
                     fullscreenControl: false,
-                    zoomControl: false,
+                    panControl: false,
+                    zoomControl: true,
+                    gestureHandling: 'cooperative',
+                    mapTypeId: mapType,
+                    draggableCursor: 'pointer',
                 })
             );
-            new google.maps.Marker({
-                position: new google.maps.LatLng(Number(userLocation.lat), Number(userLocation.lng)),
-                map: map,
-                icon: bikeIcon,
-                // zIndex: zIndex ,
-            });
-
-            var newArr = bikeLocations.map(function(bike: any, index: any){
-         
-              // printing element
-              console.log("key : ",index, "value : ",bike);
-
-            // testing
-            //   new google.maps.Marker({
-            //     position: new google.maps.LatLng(Number(bike.lat), Number(bike.lng)),
-            //     map: map,
-            //     icon: bikeIcon
-            // });
-            })
-
-            // from original file
-            //  {
-            //   // add bikes from dynamodb table
-            //   this.state.bikelocations.Items.map((bike, index) => {
-            //     // console.log("in ui", bike)
-            //     return (
-            //       <Marker title={bike.bikeid} 
-            //         key={index}
-            //         position ={{
-            //           lat: bike.lat,
-            //           lng: bike.lng        
-            //         }}
-            //         icon={{url: 'https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/50/000000/external-bike-vacation-vitaliy-gorbachev-fill-vitaly-gorbachev.png',
-            //               scaledSize: new window.google.maps.Size(25, 25)}}
-            //         >
-            //   </Marker>
-            //     )
-            //   })
-            // }
         }
     };
-    const defaultMapStart = (): void => {
-        console.log("test start");
-        console.log(userLocation);
-        console.log(bikeLocations);
-        console.log("test end");
-        const defaultAddress = new google.maps.LatLng(cmuPosition);
-        initMap(zoom, defaultAddress);
-    };
-
-    useEffect((): void => {
-        if (!map) {
-            defaultMapStart()
-        }
-    }, [map]);
 
     return (
         <div className="map-container">
