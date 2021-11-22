@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Button, Fab } from '@material-ui/core';
 import SpeedDialMenu from './common/SpeedDialMenu';
@@ -14,6 +14,7 @@ import {
 } from '@material-ui/icons';
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
+import QrReader from 'react-qr-reader';
 
 interface Props {
     onChangeMapStyle: any;
@@ -57,8 +58,9 @@ export function BottomMenu(props: Props): ReactElement {
     const { state, dispatch } = useContext(AppContext);
     const classes = useStyles();
     const [isLocked, setIsLocked] = React.useState(false);
+    const [scanResultWebCam, setScanResultWebCam] = useState('');
+    const [scanQRCodeSelected, setQRCodeSelection] = React.useState(false);
 
-    
     const handleRide = async () => {
         // Call API to unlock scooter here
         dispatch(setIsRiding(true))
@@ -99,9 +101,45 @@ export function BottomMenu(props: Props): ReactElement {
         },
     ]
 
+    const handleErrorWebCam = (error: any) => {
+        console.log(error);
+    }
+    
+    const handleScanWebCam = (result: any) => {
+        if (result){
+            setScanResultWebCam(result);
+        }
+    }
+
+    const handleQRCodeSelection = (result: any) => {
+        setQRCodeSelection(!scanQRCodeSelected);
+    };
+    
     return (
         <div className={classes.root}>
             <Grid container justify="center" alignItems="flex-end" direction="column" >
+                
+                {/* <Grid container justify="flex-end" alignItems="center">
+                        <Button 
+                            className={classes.button} 
+                            onClick={handleQRCodeSelection}
+                            variant="contained" 
+                            color="primary" 
+                            size="large" >
+                            Scan QR Code
+                        </Button>
+                </Grid> */}
+                
+                {scanQRCodeSelected && <Grid container>
+                        {/* <h3>Scan QR Code With Camera</h3> */}
+                        <QrReader
+                            delay={300}
+                            style={{width: '25%', position: 'absolute', left: '50%', top: '0%', transform: 'translate(-50%, -50%)'}}
+                            onError={handleErrorWebCam}
+                            onScan={handleScanWebCam}
+                        />
+                        {/* <h3>Camera QR Code: {scanResultWebCam}</h3> */}
+                </Grid>}
 
                 <Grid item>
                     <SpeedDialMenu
@@ -131,9 +169,20 @@ export function BottomMenu(props: Props): ReactElement {
                         {state.user.isRiding ? "End Ride" : "Ride" } 
                         {/* Post repo migration test change */}
                     </Button>
+
+                    <Button 
+                            className={classes.button} 
+                            onClick={handleQRCodeSelection}
+                            variant="contained" 
+                            color="primary" 
+                            size="large" >
+                            Scan QR Code
+                        </Button>
                 </Grid>
 
             </Grid>
         </div>
     )
 }
+
+

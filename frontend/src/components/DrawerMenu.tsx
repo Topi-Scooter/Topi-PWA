@@ -104,7 +104,8 @@ function DrawerMenu(props: Props) : ReactElement {
         <div className={classes.root}>
             <Fab size="small" color='primary' onClick={toggleDrawer(!isOpen)}>
                 <MenuIcon/>
-            </Fab>   
+            </Fab>
+
             <SwipeableDrawer
                 open={isOpen}
                 onClose={toggleDrawer(false)}
@@ -149,6 +150,7 @@ function DrawerMenu(props: Props) : ReactElement {
                     </Grid>
                 </Grid>
             </SwipeableDrawer>
+
         </div>
     )
 }

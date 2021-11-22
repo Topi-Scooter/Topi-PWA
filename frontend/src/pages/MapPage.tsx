@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, ReactElement, useContext } from 'react';
+import { Grid, Button, Fab } from '@material-ui/core';
 import Map from '../components/Map';
 import { loadMapApi } from '../utils/GoogleMapsUtils';
 import { BottomMenu } from '../components/BottomMenu';
@@ -47,6 +48,12 @@ export default function MapPage(props: Props): ReactElement {
                   mapTypeControl={true}
                 //   setDistanceInKm={setDistanceInKm}
                 />)}
+            {/* <Button 
+                variant="contained" 
+                color="primary" 
+                size="large" >
+                Scan QR Code
+            </Button> */}
             <TopMenu/>
             <BottomMenu  onChangeMapStyle={handleMapsStyleUpdate}/>
         </div>
