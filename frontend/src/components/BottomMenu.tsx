@@ -108,6 +108,11 @@ export function BottomMenu(props: Props): ReactElement {
     const handleScanWebCam = (result: any) => {
         if (result){
             setScanResultWebCam(result);
+            console.log("TESTING", result);
+            setQRCodeSelection(false);
+            var scannedBike = JSON.parse(result);
+            console.log("TEST bikeid", scannedBike.bikeid);
+            console.log("TEST slot", scannedBike.slot);
         }
     }
 
@@ -117,19 +122,7 @@ export function BottomMenu(props: Props): ReactElement {
     
     return (
         <div className={classes.root}>
-            <Grid container justify="center" alignItems="flex-end" direction="column" >
-                
-                {/* <Grid container justify="flex-end" alignItems="center">
-                        <Button 
-                            className={classes.button} 
-                            onClick={handleQRCodeSelection}
-                            variant="contained" 
-                            color="primary" 
-                            size="large" >
-                            Scan QR Code
-                        </Button>
-                </Grid> */}
-                
+            <Grid container justify="center" alignItems="flex-end" direction="column" >                
                 {scanQRCodeSelected && <Grid container>
                         {/* <h3>Scan QR Code With Camera</h3> */}
                         <QrReader
@@ -138,9 +131,10 @@ export function BottomMenu(props: Props): ReactElement {
                             onError={handleErrorWebCam}
                             onScan={handleScanWebCam}
                         />
-                        {/* <h3>Camera QR Code: {scanResultWebCam}</h3> */}
                 </Grid>}
 
+                <h3>Camera QR Code: {scanResultWebCam}</h3>
+                
                 <Grid item>
                     <SpeedDialMenu
                         className={classes.speedDial}
