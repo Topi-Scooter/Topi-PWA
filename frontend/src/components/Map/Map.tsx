@@ -22,11 +22,7 @@ const Map: React.FC<IMap> = ({ mapType, mapTypeControl = false}) => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [map, setMap] = useState<GoogleMap>();
-    const [marker, setMarker] = useState<IMarker>();
     const [homeMarker, setHomeMarker] = useState<GoogleMarker>();
-    const [googleMarkers, setGoogleMarkers] = useState<GoogleMarker[]>([]);
-    const [listenerIdArray, setListenerIdArray] = useState<any[]>([]);
-    const [LastLineHook, setLastLineHook] = useState<GooglePolyline>();
 
     const startMap = (): void => {
         if (!map) {
@@ -87,7 +83,6 @@ const Map: React.FC<IMap> = ({ mapType, mapTypeControl = false}) => {
                     });
                 }
                 var userLocation: any = getUserPosition();
-                // console.log("userLocation function completed, Results: ", userLocation);
                 return userLocation;
     };
 

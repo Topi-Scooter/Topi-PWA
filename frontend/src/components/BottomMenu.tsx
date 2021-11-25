@@ -124,7 +124,6 @@ export function BottomMenu(props: Props): ReactElement {
         <div className={classes.root}>
             <Grid container justify="center" alignItems="flex-end" direction="column" >                
                 {scanQRCodeSelected && <Grid container>
-                        {/* <h3>Scan QR Code With Camera</h3> */}
                         <QrReader
                             delay={300}
                             style={{width: '25%', position: 'absolute', left: '50%', top: '0%', transform: 'translate(-50%, -50%)'}}
@@ -132,8 +131,6 @@ export function BottomMenu(props: Props): ReactElement {
                             onScan={handleScanWebCam}
                         />
                 </Grid>}
-
-                <h3>Camera QR Code: {scanResultWebCam}</h3>
                 
                 <Grid item>
                     <SpeedDialMenu
@@ -178,5 +175,3 @@ export function BottomMenu(props: Props): ReactElement {
         </div>
     )
 }
-
-
