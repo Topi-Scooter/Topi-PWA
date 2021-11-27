@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { TopMenu } from '../components/TopMenu'
+import Button from '@mui/material/Button';
+
+
 interface Props {
     
 }
@@ -16,8 +19,11 @@ function SettingsPage(props: Props): ReactElement {
         <div>
             <TopMenu/>
             Settings Page
-            <div>
-            <Link to = '/changepassword'>Change password</Link>
+            <div className = "settingsPage-div">
+                <Button
+                variant="outlined" 
+                href="/changepassword"
+                >Change Password</Button>
 
             </div>
   
