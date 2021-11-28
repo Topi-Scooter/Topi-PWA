@@ -2,8 +2,9 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { MapPage, ProfilePage, PaymentPage, SettingsPage, AboutPage, ContactPage, AdminPage } from './pages';
+
 import styled, { ThemeProvider } from "styled-components"
+import { MapPage, ProfilePage, PaymentPage, SettingsPage, AboutPage, ContactPage, AdminPage, ChangePasswordPage} from './pages';
 
 import { AppReducer, setIsAdmin } from './state/reducer';
 import { initialAppState } from './state/state';
@@ -46,11 +47,13 @@ function App() {
 								<Route exact path="/about" render={props => <AboutPage/>}/>
 								<Route exact path="/logout" render={props => <AmplifySignOut/>}/>
 								<Route exact path="/admin" render={props => state.user.isAdmin ? <AdminPage/> : <div><AmplifySignOut/> <h1>Not Authorized!</h1></div>}/>
+                <Route exact path="/changepassword" render={props => <ChangePasswordPage/>}/>
 							</Switch>
 						</Router>
 					</StyledApp>
 				</ThemeProvider>
       </GlobalThemeContext.Provider>
+
     </AppContext.Provider>
   );
 }

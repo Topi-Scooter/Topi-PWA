@@ -15,6 +15,7 @@ import {
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
 import { useGlobalThemeContext } from "../state/context"
+import QrReader from 'react-qr-reader';
 
 interface Props {
     onChangeMapStyle: any;
@@ -60,6 +61,8 @@ export function BottomMenu(props: Props): ReactElement {
 		const { theme, setTheme } = useGlobalThemeContext();
     const classes = useStyles();
     const [isLocked, setIsLocked] = React.useState(false);
+    const [scanResultWebCam, setScanResultWebCam] = useState('');
+    const [scanQRCodeSelected, setQRCodeSelection] = React.useState(false);
 
     const toggleTheme = () => {
         if (theme === 'light') {
@@ -109,10 +112,37 @@ export function BottomMenu(props: Props): ReactElement {
         },
     ]
 
+    const handleErrorWebCam = (error: any) => {
+        console.log(error);
+    }
+    
+    const handleScanWebCam = (result: any) => {
+        if (result){
+            setScanResultWebCam(result);
+            console.log("TESTING", result);
+            setQRCodeSelection(false);
+            var scannedBike = JSON.parse(result);
+            console.log("TEST bikeid", scannedBike.bikeid);
+            console.log("TEST slot", scannedBike.slot);
+        }
+    }
+
+    const handleQRCodeSelection = (result: any) => {
+        setQRCodeSelection(!scanQRCodeSelected);
+    };
+    
     return (
         <div className={classes.root}>
-            <Grid container justify="center" alignItems="flex-end" direction="column" >
-
+            <Grid container justify="center" alignItems="flex-end" direction="column" >                
+                {scanQRCodeSelected && <Grid container>
+                        <QrReader
+                            delay={300}
+                            style={{width: '25%', position: 'absolute', left: '50%', top: '0%', transform: 'translate(-50%, -50%)'}}
+                            onError={handleErrorWebCam}
+                            onScan={handleScanWebCam}
+                        />
+                </Grid>}
+                
                 <Grid item>
                     <SpeedDialMenu
                         className={classes.speedDial}
@@ -141,6 +171,15 @@ export function BottomMenu(props: Props): ReactElement {
                         {state.user.isRiding ? "End Ride" : "Ride" } 
                         {/* Post repo migration test change */}
                     </Button>
+
+                    <Button 
+                            className={classes.button} 
+                            onClick={handleQRCodeSelection}
+                            variant="contained" 
+                            color="primary" 
+                            size="large" >
+                            Scan QR Code
+                        </Button>
                 </Grid>
 
             </Grid>
