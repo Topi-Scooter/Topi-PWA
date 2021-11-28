@@ -14,6 +14,7 @@ import {
 } from '@material-ui/icons';
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
+import { useGlobalThemeContext } from "../state/context"
 import QrReader from 'react-qr-reader';
 
 interface Props {
@@ -54,13 +55,23 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+
 export function BottomMenu(props: Props): ReactElement {
-    const { state, dispatch } = useContext(AppContext);
+		const { state, dispatch } = useContext(AppContext);
+		const { theme, setTheme } = useGlobalThemeContext();
     const classes = useStyles();
     const [isLocked, setIsLocked] = React.useState(false);
     const [scanResultWebCam, setScanResultWebCam] = useState('');
     const [scanQRCodeSelected, setQRCodeSelection] = React.useState(false);
 
+    const toggleTheme = () => {
+        if (theme === 'light') {
+          setTheme('dark');
+        } else {
+          setTheme('light');
+        }
+    }
+    
     const handleRide = async () => {
         // Call API to unlock scooter here
         dispatch(setIsRiding(true))
@@ -74,7 +85,7 @@ export function BottomMenu(props: Props): ReactElement {
     const toggleLock = () => {
         setIsLocked(!isLocked);
     };
-
+		
     const speedDialActions= 
     [
         {
@@ -97,7 +108,7 @@ export function BottomMenu(props: Props): ReactElement {
         {
             icon: <Brightness4Icon/>,
             name: "Toggle Dark Mode",
-            callback: ()=>{props.onChangeMapStyle('dark')},
+            callback: ()=>{ toggleTheme() },
         },
     ]
 
