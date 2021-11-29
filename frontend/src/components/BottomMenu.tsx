@@ -124,6 +124,7 @@ export function BottomMenu(props: Props): ReactElement {
             var scannedBike = JSON.parse(result);
             console.log("TEST bikeid", scannedBike.bikeid);
             console.log("TEST slot", scannedBike.slot);
+            state.user.isRiding ? handleCloseRide() : handleRide();
         }
     }
 
