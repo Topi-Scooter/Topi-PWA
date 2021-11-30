@@ -3,12 +3,20 @@ import { TopMenu } from '../components/TopMenu'
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import Button from '@mui/material/Button';
+import { useHistory } from 'react-router-dom';
+
+
 interface Props {
     
 }
 
-
+//TODO Handle error or success for change password
 function ChangePasswordPage(props: Props): ReactElement {
+    let history = useHistory();
+
+    const redirect = () => {
+      history.push('/settings')
+    }
 
     const [password,setPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -21,8 +29,12 @@ function ChangePasswordPage(props: Props): ReactElement {
         .then(user => {
             return Auth.changePassword(user, password,newPassword );
         })
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            redirect()
+        })
         .catch(err => console.log(err));
+
     }
 
 
