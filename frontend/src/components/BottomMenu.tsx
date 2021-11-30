@@ -127,15 +127,13 @@ export function BottomMenu(props: Props): ReactElement {
             console.log("TESTING", result);
             setQRCodeSelection(false);
             var scannedBike = JSON.parse(result);
+           
+            // example of how to retrieve data from qr code
             console.log("TEST bikeid", scannedBike.bikeid);
             console.log("TEST slot", scannedBike.slot);
-            // console.log("State bikeId: ", state.scooter.bikeId);
-            // dispatch(setBikeId(state.scooter.bikeId));
-            handleBikeId(scannedBike.bikeid);
-            console.log("Test changed State bikeId: ", state.scooter.bikeId);
             
-            // state.scooter.bikeId = scannedBike.bikeId;
-            // console.log("test state thing: ", state.scooter.bikeId);
+            handleBikeId(scannedBike.bikeid);
+           
             state.user.isRiding ? handleCloseRide() : handleRide();
         }
     }
