@@ -34,6 +34,15 @@ export function AppReducer(state: State, action: StateActions): State {
                 }
             }
 
+        case ActionType.setBikeId:
+            return {
+                ...state, // Copy existing state
+                scooter: {
+                    ...state.scooter,
+                    bikeId: action.payload 
+                }
+            }
+    
         /* --App State Cases-- */
         case ActionType.SetMapLoaded:
             return {
@@ -65,6 +74,11 @@ export const setIsAdmin = (isAdmin: boolean): SetIsAdmin => ({
 export const setBatteryLevel = (batteryLevel: BatteryPercentages): SetBatteryLevel => ({
     type: ActionType.SetBatteryLevel,
     payload: batteryLevel,
+})
+
+export const setBikeId = (bikeId: string): any => ({
+    type: ActionType.setBikeId,
+    payload: bikeId,
 })
 
 /* --App State Setter Functions-- */

@@ -14,6 +14,7 @@ import {
 } from '@material-ui/icons';
 import { AppContext } from '../state/context';
 import { setIsRiding } from '../state/reducer';
+import { setBikeId } from '../state/reducer';
 import { useGlobalThemeContext } from "../state/context"
 import QrReader from 'react-qr-reader';
 
@@ -57,8 +58,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export function BottomMenu(props: Props): ReactElement {
-		const { state, dispatch } = useContext(AppContext);
-		const { theme, setTheme } = useGlobalThemeContext();
+	const { state, dispatch } = useContext(AppContext);
+	const { theme, setTheme } = useGlobalThemeContext();
     const classes = useStyles();
     const [isLocked, setIsLocked] = React.useState(false);
     const [scanResultWebCam, setScanResultWebCam] = useState('');
@@ -76,6 +77,10 @@ export function BottomMenu(props: Props): ReactElement {
         // Call API to unlock scooter here
         dispatch(setIsRiding(true))
     };
+
+    const handleBikeId = async (bikeId: string) => {
+        dispatch(setBikeId(bikeId));
+    }
 
     const handleCloseRide = async () => {
         // Call API to lock scooter here
@@ -124,6 +129,13 @@ export function BottomMenu(props: Props): ReactElement {
             var scannedBike = JSON.parse(result);
             console.log("TEST bikeid", scannedBike.bikeid);
             console.log("TEST slot", scannedBike.slot);
+            // console.log("State bikeId: ", state.scooter.bikeId);
+            // dispatch(setBikeId(state.scooter.bikeId));
+            handleBikeId(scannedBike.bikeid);
+            console.log("Test changed State bikeId: ", state.scooter.bikeId);
+            
+            // state.scooter.bikeId = scannedBike.bikeId;
+            // console.log("test state thing: ", state.scooter.bikeId);
             state.user.isRiding ? handleCloseRide() : handleRide();
         }
     }

@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Card, CardContent, createStyles, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import * as Colors from '@material-ui/core/colors';
 import DrawerMenu from './DrawerMenu';
 import ScooterBattery from './common/ScooterBattery';
+import { AppContext } from '../state/context';
 
 interface Props {
     
@@ -35,7 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
 function RidingInfoCard(props: Props): ReactElement {
     const classes = useStyles();
     // TODO: get scooter name from scooter state
-    const scooter = {name: "X3F23S"}
+    const { state } = useContext(AppContext);
+    // const batteryIcon = BatteryPercentagesIcons[state.scooter.batteryLevel];
+
+    // const scooter = {name: "X3F23S"}
+    const scooter = {name: state.scooter.bikeId};
 
     return (
         <div className={classes.root}>

@@ -8,7 +8,7 @@ export enum ActionType {
 
     /* --Scooter State Actions-- */
     SetBatteryLevel, // TODO: UI wont update this, server will | Look into this
-
+    setBikeId,
     /* --App State Actions-- */
     SetMapLoaded,
 }
@@ -30,10 +30,14 @@ export interface SetBatteryLevel {
     payload: BatteryPercentages;
 }
 
+export interface setBikeId {
+    type: ActionType.setBikeId;
+    payload: string;
+}
 /* --App State Actions-- */
 export interface SetMapLoaded {
     type: ActionType.SetMapLoaded;
     payload: boolean;
 }
 
-export type StateActions = SetIsRiding | SetMapLoaded | SetBatteryLevel | SetIsAdmin;
+export type StateActions = SetIsRiding | SetMapLoaded | SetBatteryLevel | SetIsAdmin | setBikeId;
