@@ -13,37 +13,31 @@ interface Props {
 }
 
 //TODO Handle error or success for change password
-function ChangePasswordPage(props: Props): ReactElement {
+function ChangeEmailPage(props: Props): ReactElement {
     let history = useHistory();
 
     const redirect = () => {
       history.push('/settings')
     }
 
-    const [password,setPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [newEmail,setNewEmail] = useState("");
+    const [userEmail,setUserEmail] = useState("");
+    
+    Auth.currentAuthenticatedUser().then((user)=> setUserEmail(user.attributes.email));
+
 
     function handleSubmit(e:any){
         e.preventDefault()
         
-        Auth.currentAuthenticatedUser()
-        .then(user => {
-            return Auth.changePassword(user, password,newPassword );
-        })
-        .then(data => {
-            console.log(data)
-            redirect()
-        })
-        .catch(err => {return (<div>err</div>)});
-
+        //Todo send email await response then submit change.
     }
 
 
 
     return (
-        <div className = "changePassword">
+        <div className = "changeEmail">
             <TopMenu/>
-            <div className = "changePassword-Form">
+            <div className = "changeEmail-Form">
             <Box      
                 component="form"
                 sx={{
@@ -56,17 +50,9 @@ function ChangePasswordPage(props: Props): ReactElement {
                     <TextField
                     required
                     id="outlined-required"
-                    label="Current Password"
-                    value = {password} 
-                    onChange = {(event) => setPassword(event.target.value)}
-                    type ="password"
-                    />
-                    <TextField
-                    required
-                    id="outlined-required"
-                    label="New Password"
-                    value = {newPassword} 
-                    onChange = {(event) => setNewPassword(event.target.value)}
+                    label="New Email"
+                    value = {newEmail} 
+                    onChange = {(event) => setNewEmail(event.target.value)}
                     type ="password"
                     />
                 </div>
@@ -81,4 +67,4 @@ function ChangePasswordPage(props: Props): ReactElement {
 
     )
 }
-export default withAuthenticator(ChangePasswordPage);
+export default withAuthenticator(ChangeEmailPage);
