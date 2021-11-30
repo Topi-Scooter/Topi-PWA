@@ -57,68 +57,7 @@ function SettingsPage(props: Props): ReactElement {
         </Box>
         </div>
     )
-    // return (
-    //     <div>
-    //         <TopMenu/>
-    //         Settings Page
-    //         <div>
-    //             <Box
-    //                 component="div"
-    //                 sx={{
-    //                     display: 'inline-flex',
-    //                     p: 1,
-    //                     mt: 10,
-    //                     mx: 5
-        
-    //                 }}>
-    //                 <div style= {textAlign}>
-    //                 <h1>Change Password</h1>
-    //                 <p> A strong password is at least 8 characters long. </p>
-    //                 </div>
-    //             </Box>
-    //             <Box
-    //                 component="div"
-    //                 sx={{
-    //                     display: 'inline-flex',
-    //                     p: 1,
-    //                     m: 5
-    //                 }}>
-    //                 <Button
-    //                     variant="outlined" 
-    //                     href="/changepassword"
-    //                 >Change Password</Button>
-    //             </Box>
-    //             <br></br>
-    //             <Box
-    //                 component="div"
-    //                 sx={{
-    //                     display: 'inline-flex',
-    //                     p: 1,
-    //                     mt: 10,
-    //                     mx: 5
-    //                 }}>
-    //                 <div style= {textAlign}>
-    //                 <h1>Change Email</h1>
-    //                 <p> {email} </p>
-    //                 </div>
-    //             </Box>
-    //             <Box
-    //                 component="div"
-    //                 sx={{
-    //                     display: 'inline-flex',
-    //                     p: 1,
-    //                     m: 5,
-    //                 }}>
-    //                 <Button
-    //                     variant="outlined" 
-    //                     href=""
-    //                 >Change Email</Button>
-    //             </Box>
-    //         </div>
-  
-    //     </div>
 
-    // )
 }
 
 export default SettingsPage
