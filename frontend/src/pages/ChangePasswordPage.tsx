@@ -3,6 +3,8 @@ import { TopMenu } from '../components/TopMenu'
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router-dom';
 
 
@@ -43,23 +45,38 @@ function ChangePasswordPage(props: Props): ReactElement {
         <div className = "changePassword">
             <TopMenu/>
             <div className = "changePassword-Form">
-
-                <form onSubmit = {handleSubmit}>
-                    <label> Current Password: </label>
-                        <input type = 'password'
-                            value = {password} 
-                            onChange = {(event) => setPassword(event.target.value)}
-                            />
-
-                    <label> New Password: </label>
-                        <input type = 'password' 
-                            value = {newPassword} 
-                            onChange = {(event) => setNewPassword(event.target.value)}
-                            />
+            <Box      
+                component="form"
+                sx={{
+        '       & .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                onSubmit = {handleSubmit}
+                noValidate
+                autoComplete="off"
+            >   <div>
+                    <TextField
+                    required
+                    id="outlined-required"
+                    label="Current Password"
+                    value = {password} 
+                    onChange = {(event) => setPassword(event.target.value)}
+                    type ="password"
+                    />
+                    <TextField
+                    required
+                    id="outlined-required"
+                    label="New Password"
+                    value = {newPassword} 
+                    onChange = {(event) => setNewPassword(event.target.value)}
+                    type ="password"
+                    />
+                </div>
                 <Button type ="submit" variant= "contained">Submit</Button>
-                </form>
-            
+                
+            </Box>
             </div>
+            
+            
   
         </div>
 

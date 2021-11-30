@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement,useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TopMenu } from '../components/TopMenu'
 import Button from '@mui/material/Button';
-
+import Box from '@mui/material/Box';
+import { Auth } from 'aws-amplify';
 
 interface Props {
     
@@ -10,21 +11,72 @@ interface Props {
 
 function SettingsPage(props: Props): ReactElement {
 
-    function Clicked(e:any) {
-        e.preventDefault()
-        console.log(e)
+    // function Clicked(e:any) {
+    //     e.preventDefault()
+    //     console.log(e)
+    // }
+    const textAlign={
+        textAlign: 'center' as 'center'
     }
-
+    const [email,setEmail] = useState("");
+    Auth.currentAuthenticatedUser().then((user)=> setEmail(user.attributes.email));
     return (
         <div>
             <TopMenu/>
             Settings Page
-            <div className = "settingsPage-div">
-                <Button
-                variant="outlined" 
-                href="/changepassword"
-                >Change Password</Button>
-
+            <div>
+                <Box
+                    component="div"
+                    sx={{
+                        display: 'inline-flex',
+                        p: 1,
+                        mt: 10,
+                        mx: 5
+        
+                    }}>
+                    <div style= {textAlign}>
+                    <h1>Change Password</h1>
+                    <p> A strong password is at least 8 characters long. </p>
+                    </div>
+                </Box>
+                <Box
+                    component="div"
+                    sx={{
+                        display: 'inline-flex',
+                        p: 1,
+                        m: 5
+                    }}>
+                    <Button
+                        variant="outlined" 
+                        href="/changepassword"
+                    >Change Password</Button>
+                </Box>
+                <br></br>
+                <Box
+                    component="div"
+                    sx={{
+                        display: 'inline-flex',
+                        p: 1,
+                        mt: 10,
+                        mx: 5
+                    }}>
+                    <div style= {textAlign}>
+                    <h1>Change Email</h1>
+                    <p> {email} </p>
+                    </div>
+                </Box>
+                <Box
+                    component="div"
+                    sx={{
+                        display: 'inline-flex',
+                        p: 1,
+                        m: 5,
+                    }}>
+                    <Button
+                        variant="outlined" 
+                        href=""
+                    >Change Email</Button>
+                </Box>
             </div>
   
         </div>
