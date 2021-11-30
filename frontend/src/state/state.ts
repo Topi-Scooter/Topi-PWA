@@ -16,6 +16,7 @@ export type UserState = {
 };
 export type ScooterState = {
     batteryLevel: BatteryPercentages;
+    bikeId: string;
 };
 export type AppState = {
     mapIsLoaded: boolean
@@ -35,6 +36,7 @@ export const initialAppState: State = {
     },
     scooter: {
         batteryLevel: BatteryPercentages.BatteryFull,
+        bikeId: " "
     },
     app: {
         mapIsLoaded: false,

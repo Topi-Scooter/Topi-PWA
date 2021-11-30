@@ -10,3 +10,15 @@ export const AppContext = React.createContext<{
     state: initialAppState,
     dispatch: () => undefined,
 })
+  
+export type GlobalTheme = {
+    theme: string,
+    setTheme: (t: string) => void
+}
+
+export const GlobalThemeContext = React.createContext<GlobalTheme>({
+    theme: "light",
+    setTheme: () => {},
+})
+
+export const useGlobalThemeContext = () => React.useContext(GlobalThemeContext)
