@@ -40,6 +40,9 @@ export declare class Scooter {
 
 export declare class User {
   readonly id: string;
+  readonly username: string;
+  readonly email: string;
+  readonly phone_number: string;
   readonly isRiding: boolean;
   readonly createdAt?: string;
   readonly updatedAt?: string;
